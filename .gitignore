@@ -5,3 +5,6 @@
 .vscode/ipch
 platformio-device-monitor*.log
 lib/*
+src/*
+!src/main.cpp
+!src/README.md
