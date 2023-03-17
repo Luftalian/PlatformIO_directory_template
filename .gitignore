@@ -8,6 +8,7 @@ lib/*
 !lib/README
 src/*
 !src/main.cpp
+!src/main.h
 !src/README.md
 # ================================
 # CREATEのlibでないライブラリは以下のとおり下に書く
