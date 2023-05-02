@@ -1,3 +1,0 @@
-[submodule "lib"]
-	path = lib
-	url = https://github.com/Luftalian/Avi_ESP32_lib.git
