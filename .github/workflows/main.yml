@@ -5,13 +5,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: install tree command
-        run: |
-          pwd
-          sudo apt-get install tree
-          tree
       - uses: actions/checkout@v3
       - name: Checkout submodule
         uses: actions/checkout@v3
