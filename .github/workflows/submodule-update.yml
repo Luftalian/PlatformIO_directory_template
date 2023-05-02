@@ -1,44 +1,31 @@
----
-name: Submodule Updates
+name: Update Submodule
 
-#############################
-# Start the job on all push #
-#############################
 on:
-  push:
-    branches-ignore: [master, main]
-  pull_request:
-    branches: [master, main]
+  repository_dispatch:
+    types: [update]
 
-###############
-# Set the Job #
-###############
 jobs:
-  build:
-    name: Submodule update
+  update-submodule:
     runs-on: ubuntu-latest
-    env:
-      PARENT_REPOSITORY: 'org/example-repository'
-      CHECKOUT_BRANCH: 'main'
-      PR_AGAINST_BRANCH: 'main'
-      OWNER: 'org'
 
     steps:
-      ##########################
-      # Checkout the code base #
-      ##########################
-      - name: Checkout Code
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      ####################################
-      # Run the action against code base #
-      ####################################
-      - name: run action
-        id: run_action
-        uses: releasehub-com/github-action-create-pr-parent-submodule@v1
-        with:
-          github_token: ${{ secrets.RELEASE_HUB_SECRET }}
-          parent_repository: ${{ env.PARENT_REPOSITORY }}
-          checkout_branch: ${{ env.CHECKOUT_BRANCH}}
-          pr_against_branch: ${{ env.PR_AGAINST_BRANCH }}
-          owner: ${{ env.OWNER }}
+    - name: Update Submodule
+      run: |
+        git submodule update --init --recursive
+        git submodule update --remote --merge
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v4
+      with:
+        title: 'Update Submodule'
+        body: 'An update was made to the submodule.'
+        commit-message: 'chore: update submodule'
+        branch: 'update-submodule'
+        branch-suffix: timestamp
+        delete-branch: true
+        reviewers: octocat
+        labels: dependencies
+        token: ${{ secrets.UPDATE_SUBMODULE }}
