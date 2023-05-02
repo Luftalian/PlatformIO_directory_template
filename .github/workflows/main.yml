@@ -17,18 +17,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: true
-      # - name: Copy the lib repo
-      #   run: |
-      #     mkdir tmp_lib
-      #     cp -r ./lib/* ./tmp_lib
-      # - name: Clone libraries
-      #   uses: actions/checkout@v3
-      #   with:
-      #     repository: CREATE-ROCKET/Avi_ESP_Libs
-      #     path: lib
-      # - name: Copy the lib repo
-      #   run: |
-      #     cp -r -u ./tmp_lib/* ./lib
       - uses: actions/cache@v3
         with:
           path: |
