@@ -4,11 +4,10 @@
 .vscode/launch.json
 .vscode/ipch
 platformio-device-monitor*.log
-lib/*
-!lib/README
+# lib/*
 src/*
 !src/main.cpp
-!src/main.h
+!src/*/
 !src/README.md
 # ================================
 # CREATEのlibでないライブラリは以下のとおり下に書く
