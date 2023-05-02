@@ -5,7 +5,7 @@ branch-push:
 	git checkout -b $(branch)
 	git add .
 	git commit -m "$(branch)"
-	git push
+	git push --set-upstream origin $(branch)
 
 clear:
 	rm -rf ./src/utils
