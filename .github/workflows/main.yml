@@ -13,6 +13,10 @@ jobs:
           sudo apt-get install tree
           tree
       - uses: actions/checkout@v3
+      - name: Checkout submodule
+        uses: actions/checkout@v3
+        with:
+          submodules: true
       # - name: Copy the lib repo
       #   run: |
       #     mkdir tmp_lib
