@@ -2,7 +2,7 @@ name: Update Submodule
 
 on:
   repository_dispatch:
-    types: [update]
+    types: [on-demand-test]
 
 jobs:
   update-submodule:
