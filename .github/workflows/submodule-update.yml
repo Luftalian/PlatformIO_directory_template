@@ -2,7 +2,7 @@ name: Update Submodule
 
 on:
   repository_dispatch:
-    types: [on-demand-test]
+    types: [update]
 
 jobs:
   update-submodule:
@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Update Submodule
       run: |
@@ -26,6 +26,5 @@ jobs:
         branch: 'update-submodule'
         branch-suffix: timestamp
         delete-branch: true
-        reviewers: octocat
         labels: dependencies
         token: ${{ secrets.UPDATE_SUBMODULE }}
