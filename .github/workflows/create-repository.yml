@@ -13,3 +13,4 @@ jobs:
           token: ${{ secrets.UPDATE_SUBMODULE }}
           repository: Luftalian/Avi_ESP32_lib
           event-type: repository
+          client-payload: '{"rep": "${{ github.event.repository.name }}"}'
