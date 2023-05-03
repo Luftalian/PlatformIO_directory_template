@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Repository Dispatch1
         env:
-          MY_SECRET: ${{ secrets.test }}
+          MY_SECRET: ${{ secrets.UPDATE_SUBMODULE }}
         if: env.MY_SECRET != null && github.run_number == 1
         uses: peter-evans/repository-dispatch@v2
         with:
