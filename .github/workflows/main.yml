@@ -25,17 +25,3 @@ jobs:
 
       - name: Build PlatformIO Project
         run: pio run
-  
-  library:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Repository Dispatch1
-        env:
-          MY_SECRET: ${{ secrets.test }}
-        if: env.MY_SECRET != null && github.run_number == 1
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.UPDATE_SUBMODULE }}
-          repository: Luftalian/Avi_ESP32_lib
-          event-type: repository
-          client-payload: '{"repo": "${{ github.repository }}"}'

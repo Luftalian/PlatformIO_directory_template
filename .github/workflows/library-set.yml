@@ -16,6 +16,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.UPDATE_SUBMODULE }}
-          repository: Luftalian/Avi_ESP32_lib
+          repository: CREATE-ROCKET/Avi_ESP_Libs
           event-type: repository
           client-payload: '{"repo": "${{ github.repository }}"}'
