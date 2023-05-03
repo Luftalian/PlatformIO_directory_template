@@ -27,12 +27,12 @@ jobs:
         run: pio run
   
   library:
-    env:
-      MY_SECRET: ${{ secrets.test }}
-    if: env.MY_SECRET != null && github.run_number == 1
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch1
+        env:
+          MY_SECRET: ${{ secrets.test }}
+        if: env.MY_SECRET != null && github.run_number == 1
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.UPDATE_SUBMODULE }}
