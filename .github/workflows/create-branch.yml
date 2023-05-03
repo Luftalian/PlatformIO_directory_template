@@ -1,0 +1,15 @@
+name: Create a new branch
+
+on:
+  create
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch1
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.UPDATE_SUBMODULE }}
+          repository: Luftalian/Avi_ESP32_lib
+          event-type: update
