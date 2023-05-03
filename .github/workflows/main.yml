@@ -27,10 +27,8 @@ jobs:
         run: pio run
   
   library:
-    env:
-      key1: ${{ secrets.test }}
-    if: ${{ env.key1 }} != '' && github.run_number == 1
     runs-on: ubuntu-latest
+    if: ${{ secrets.test }} != '' && github.run_number == 1
     steps:
       - name: Repository Dispatch1
         uses: peter-evans/repository-dispatch@v2
