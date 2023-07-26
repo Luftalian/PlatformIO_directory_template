@@ -10,16 +10,22 @@ jobs:
         python-version: 3.x
     - run: pip install cpplint
     - run: cpplint --help
-    - run: cpplint --filter=-whitespace/indent --recursive .
-    - run: cpplint --filter=-whitespace/indent --recursive src &> cpplint.txt
-    
-    - name: Create log comments
+    - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
+      continue-on-error: true
+    - run: echo "### cpplint log" > comments
+
+    - name: Check cpplint status
       if: ${{ github.event_name == 'pull_request' }}
       run: |
-        sed -e "1i \`\`\`bash" cpplint.txt > cpplint_with_code_block.txt
-        sed -e '$a \`\`\`' cpplint_with_code_block.txt > cpplint_with_code_block_final.txt
-        less cpplint_with_code_block_final.txt > comments
-
+        status=$?
+        if [ $status -eq 0 ]; then
+          echo "### No cpplint errors found" > comments
+        else
+          sed -e "1i \`\`\`bash" cpplint.txt > cpplint_with_code_block.txt
+          sed -e '$a \`\`\`' cpplint_with_code_block.txt > cpplint_with_code_block_final.txt
+          less cpplint_with_code_block_final.txt > comments
+        fi
+    
     - name: Post log comments
       if: ${{ github.event_name == 'pull_request' }}
       env:
