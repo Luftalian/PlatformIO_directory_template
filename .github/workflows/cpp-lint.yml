@@ -14,7 +14,6 @@ jobs:
       id: error_execution
       continue-on-error: true
     - run: echo "## C++ lint Checker" > comments
-    - run: echo ${{ steps.error_execution.outcome == 'failure' }}
 
     - name: Check cpplint status
       if: ${{ github.event_name == 'pull_request' && steps.error_execution.outcome != 'failure' }}
@@ -36,3 +35,7 @@ jobs:
         URL: ${{ github.event.pull_request.html_url }}
       run:
         gh pr comment -F ./comments "${URL}"
+
+    - name: Check cpplint status
+      if: ${{ steps.error_execution.outcome == 'failure' }}
+      run: exit 1
