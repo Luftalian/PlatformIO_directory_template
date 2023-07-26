@@ -12,7 +12,7 @@ jobs:
     - run: cpplint --help
     - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
       continue-on-error: true
-    - run: echo "### cpplint log" > comments
+    - run: echo "## C++ lint Checker" > comments
 
     - name: Check cpplint status
       if: ${{ github.event_name == 'pull_request' }}
