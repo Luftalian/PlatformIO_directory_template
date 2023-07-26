@@ -19,11 +19,12 @@ jobs:
       run: |
         status=$?
         if [ $status -eq 0 ]; then
-          echo "### No cpplint errors found" > comments
+          echo "### No cpplint errors found :tada:" >> comments
         else
+          echo "### cpplint errors found :warning:" >> comments
           sed -e "1i \`\`\`bash" cpplint.txt > cpplint_with_code_block.txt
           sed -e '$a \`\`\`' cpplint_with_code_block.txt > cpplint_with_code_block_final.txt
-          less cpplint_with_code_block_final.txt > comments
+          less cpplint_with_code_block_final.txt >> comments
         fi
     
     - name: Post log comments
