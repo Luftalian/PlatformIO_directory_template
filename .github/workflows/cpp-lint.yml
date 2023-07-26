@@ -10,8 +10,8 @@ jobs:
         python-version: 3.x
     - run: pip install cpplint
     - run: cpplint --help
-    - run: cpplint --filter=-whitespace/indent --recursive src/*
-    - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
+    - run: cpplint --filter=-whitespace/indent --recursive .
+    - run: cpplint --filter=-whitespace/indent --recursive src &> cpplint.txt
     
     - name: Create log comments
       if: ${{ github.event_name == 'pull_request' }}
