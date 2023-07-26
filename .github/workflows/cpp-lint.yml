@@ -11,9 +11,9 @@ jobs:
     - run: pip install cpplint
     - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
 
-  comment:
-    runs-on: ubuntu-latest
-    steps:
+#   comment:
+    # runs-on: ubuntu-latest
+    # steps:
     - name: Create comments
       run: |
         less cpplint.txt  > comments
