@@ -3,19 +3,15 @@
 
 #ifndef UTILS_H
 #define UTILS_H
-#include <SPICREATE.h> // 2.0.0
 #include <Arduino.h>
+#include <SPICREATE.h>  // 2.0.0
 
-class UTILS
-{
-public:
+class UTILS {
+   public:
     int version;
     void begin();
 };
 
-void UTILS::begin()
-{
-    return;
-}
+void UTILS::begin() { return; }
 
 #endif
