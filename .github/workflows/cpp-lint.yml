@@ -14,9 +14,9 @@ jobs:
     - name: Create log comments
       if: ${{ github.event_name == 'pull_request' }}
       run: |
-        sed -e "1i \`\`\`bash" cpplint.txt
-        sed -e '$a \`\`\`' cpplint.txt
-        less cpplint.txt  > comments
+        sed -e "1i \`\`\`bash" cpplint.txt > cpplint_with_code_block.txt
+        sed -e '$a \`\`\`' cpplint_with_code_block.txt > cpplint_with_code_block_final.txt
+        less cpplint_with_code_block_final.txt > comments
 
     - name: Post log comments
       if: ${{ github.event_name == 'pull_request' }}
