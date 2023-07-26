@@ -10,22 +10,24 @@ jobs:
         python-version: 3.x
     - run: pip install cpplint
     - run: cpplint --help
-    - run: cpplint --filter=-whitespace/indent --recursive --quiet src/* &> cpplint.txt
+    - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
+      id: error_execution
+      continue-on-error: true
     - run: echo "## C++ lint Checker" > comments
 
     - name: Check cpplint status
-      if: ${{ github.event_name == 'pull_request' }}
+      if: ${{ github.event_name == 'pull_request' }} && ${{ steps.error_execution.outcome != 'failure' }}
       run: |
-        status=$?
-        if [ $status -eq 0 ]; then
-          echo "### No cpplint errors found :tada:" >> comments
-        else
+        echo "### No cpplint errors found :tada:" >> comments
+
+    - name: Check cpplint status
+      if: ${{ github.event_name == 'pull_request' }} && ${{ steps.error_execution.outcome == 'failure' }}
+      run: |
           echo "### cpplint errors found :warning:" >> comments
           sed -e "1i \`\`\`bash" cpplint.txt > cpplint_with_code_block.txt
           sed -e '$a \`\`\`' cpplint_with_code_block.txt > cpplint_with_code_block_final.txt
           less cpplint_with_code_block_final.txt >> comments
-        fi
-    
+
     - name: Post log comments
       if: ${{ github.event_name == 'pull_request' }}
       env:
