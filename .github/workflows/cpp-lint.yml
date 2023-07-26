@@ -9,4 +9,18 @@ jobs:
       with:
         python-version: 3.x
     - run: pip install cpplint
-    - run: cpplint --filter=-whitespace/indent --recursive src/*
+    - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
+
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create comments
+      run: |
+        less cpplint.txt  > comments
+
+    - name: Post comments
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        URL: ${{ github.event.pull_request.html_url }}
+      run:
+        gh pr comment -F ./comments "${URL}"
