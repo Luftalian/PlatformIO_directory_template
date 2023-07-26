@@ -10,8 +10,7 @@ jobs:
         python-version: 3.x
     - run: pip install cpplint
     - run: cpplint --help
-    - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
-      continue-on-error: true
+    - run: cpplint --filter=-whitespace/indent --recursive --quiet src/* &> cpplint.txt
     - run: echo "## C++ lint Checker" > comments
 
     - name: Check cpplint status
