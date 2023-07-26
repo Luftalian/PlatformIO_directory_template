@@ -10,7 +10,6 @@ jobs:
         python-version: 3.x
     - run: pip install cpplint
     - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
-    - run: cpplint --counting=total --filter=-whitespace/indent --recursive src/* &> cpplint_count.txt
     
     - name: Create log comment
       if: ${{ github.event_name == 'pull_request' }}
