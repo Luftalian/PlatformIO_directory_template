@@ -38,4 +38,4 @@ jobs:
 
     - name: Check cpplint status
       if: ${{ steps.error_execution.outcome == 'failure' }}
-      run: echo failure
+      run: exit 1
