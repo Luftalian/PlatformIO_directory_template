@@ -11,14 +11,11 @@ jobs:
     - run: pip install cpplint
     - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
 
-#   comment:
-    # runs-on: ubuntu-latest
-    # steps:
-    - name: Create comments
+    - name: Create log comments
       run: |
         less cpplint.txt  > comments
 
-    - name: Post comments
+    - name: Post log comments
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         URL: ${{ github.event.pull_request.html_url }}
