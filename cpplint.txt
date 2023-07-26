@@ -1,3 +1,0 @@
-src/main.cpp:12:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
-Done processing src/main.cpp
-Total errors found: 1
