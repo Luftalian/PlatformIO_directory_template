@@ -10,15 +10,19 @@ jobs:
         python-version: 3.x
     - run: pip install cpplint
     - run: cpplint --filter=-whitespace/indent --recursive src/* &> cpplint.txt
+    - run: cpplint --counting=total --filter=-whitespace/indent --recursive src/* &> cpplint_count.txt
     
-    - name: Create log comments
+    - name: Create log comment
       if: ${{ github.event_name == 'pull_request' }}
       run: |
-        sed -e "1i \`\`\`bash" cpplint.txt > cpplint_with_code_block.txt
+        sed -e "1i ## C++ lint Checker" cpplint.txt > cpplint_with_discription.txt
+        sed -e "1i \`\`\`bash" cpplint_with_discription.txt > cpplint_with_code_block.txt
         sed -e '$a \`\`\`' cpplint_with_code_block.txt > cpplint_with_code_block_final.txt
         less cpplint_with_code_block_final.txt > comments
 
-    - name: Post log comments
+        grep 'Total errors found:' cpplint_count.txt > comments
+
+    - name: Post log & error comment
       if: ${{ github.event_name == 'pull_request' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
