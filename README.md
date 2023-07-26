@@ -1,1 +1,1 @@
-# PlatformIO Template Repository
+# PlatformIO Template Repository example
